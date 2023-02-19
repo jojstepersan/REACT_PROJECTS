@@ -8,9 +8,10 @@ import { ToDoList } from './ToDoList';
 import React from 'react';
 
 const toDos=[
-  {text:'Cortar ceboolla',complete:false},
-  {text:'Tomar el curso de intro a react',complete:false},
-  {text:'llorar con la llorona',complete:false}
+  { text: 'Cortar cebolla', completed: true },
+  { text: 'Tomar el cursso de intro a React', completed: false },
+  { text: 'Llorar con la llorona', completed: false },
+  { text: 'LALALALAA', completed: false },
 ];
 
 function App() {
@@ -18,11 +19,13 @@ function App() {
     <React.Fragment>
       <ToDoCounter/>
       <ToDoSearch/>
-      <input placeholder="Cebolla"/>
       <ToDoList>
         {
           toDos.map(toDo=>(
-            <ToDoItem key={toDo.text} text={toDo.text}/>
+            <ToDoItem 
+              key={toDo.text} 
+              text={toDo.text}
+              completed={toDo.completed}/>
           ))
         }
       </ToDoList>

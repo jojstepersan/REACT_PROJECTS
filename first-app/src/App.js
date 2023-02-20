@@ -28,8 +28,21 @@ function App() {
       const toDoText = toDo.text.toLocaleLowerCase();
       const searchText = searchValue.toLocaleLowerCase();
       return toDoText.includes(searchText);
-    });
-    
+    });    
+  }
+
+  const completeToDo=(text) =>{
+    const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
+    const newToDos=[...toDos];//copia de toDos como clon
+    newToDos[toDoIndex].completed = true;
+    setToDos(newToDos);
+  }
+
+  const deleteToDo=(text) =>{
+    const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
+    const newToDos=[...toDos];//copia de toDos como clon
+    newToDos.splice(toDoIndex,1);
+    setToDos(newToDos);
   }
   return (
     <React.Fragment>
@@ -47,7 +60,10 @@ function App() {
             <ToDoItem 
               key={toDo.text} 
               text={toDo.text}
-              completed={toDo.completed}/>
+              completed={toDo.completed}
+              onCompleted={()=>completeToDo(toDo.text)}
+              onDeleted={()=>deleteToDo(toDo.text)}
+              />
           ))
         }
       </ToDoList>

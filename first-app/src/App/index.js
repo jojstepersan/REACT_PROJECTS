@@ -2,26 +2,34 @@
 import React from 'react';
 import {AppUI} from './AppUI';
 
-const defaultToDos=[
-  { text: 'Cortar cebolla', completed: true },
-  { text: 'Tomar el cursso de intro a React', completed: false },
-  { text: 'Llorar con la llorona', completed: false },
-  { text: 'LALALALAA', completed: false },
-];
-
-function App() {
-  const localStorageToDos = localStorage.getItem('TODOS_V1');
-  let parsedToDos;
-  if (!localStorageToDos) {
+function useLocalStorage(itemName,initialValue){
+  const localStorageItem = localStorage.getItem(itemName);
+  let parsedItem;
+  if (!localStorageItem) {
     // Si el usuario es nuevo no existe un item en localStorage, por lo tanto guardamos uno con un array vacío
-    localStorage.setItem('TODOS_V1', JSON.stringify([]));
-    parsedToDos = [];
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = initialValue;
   } else {
     // Si existen TODOs en el localStorage los regresamos como nuestros todos
-    parsedToDos = JSON.parse(localStorageToDos);
+    parsedItem = JSON.parse(localStorageItem);
   }
 
-  const [toDos,setToDos] = React.useState(parsedToDos);
+  const [item,setItem] = React.useState(parsedItem);
+
+  const saveItem = (newItem) =>{
+    const stringifiedItem = JSON.stringify(newItem);
+    // Los guardamos en el localStorage
+    localStorage.setItem(itemName, stringifiedItem);
+    // Actualizamos nuestro estado
+    setItem(newItem); 
+  };
+  return [
+    item,
+    saveItem 
+  ]
+}
+function App() {
+  const [toDos,saveToDos]=useLocalStorage("TODOS_V1",[]);
   const [searchValue,setSearchValue] = React.useState('');
   const completedToDos = toDos.filter(toDo => toDo.completed).length;
   const totalToDos = toDos.length;
@@ -37,13 +45,7 @@ function App() {
     });    
   }
 
-  const saveToDos = (newToDos) =>{
-    const stringifiedToDos = JSON.stringify(newToDos);
-    // Los guardamos en el localStorage
-    localStorage.setItem('TODOS_V1', stringifiedToDos);
-    // Actualizamos nuestro estado
-    setToDos(newToDos); 
-  }
+  
 
   const completeToDo=(text) =>{
     const toDoIndex = toDos.findIndex(toDo => toDo.text === text);

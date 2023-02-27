@@ -7,6 +7,8 @@ import { ToDoSearch } from '../ToDoSearch';
 import { ToDoList } from '../ToDoList';
 
 function AppUI({
+    loading,
+    error,
     totalToDos,
     completedToDos,
     searchValue,
@@ -14,6 +16,7 @@ function AppUI({
     searchToDos,
     completeToDo,
     deleteToDo
+
   }){
     return (
         <React.Fragment>
@@ -26,6 +29,9 @@ function AppUI({
             setSearchValue={setSearchValue}
           />
           <ToDoList>
+            {loading && <p>Estamos cargando, no desesperes...</p>}
+            {error && <p>HUbo un Error...</p>}
+            {!loading && !searchToDos.length && <p>Crea tu primer To Do</p>}
             {
               searchToDos.map(toDo=>(
                 <ToDoItem 

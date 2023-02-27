@@ -10,7 +10,6 @@ function App() {
     <ToDoProvider>
       <AppUI/>
     </ToDoProvider>
-    
     )
 }
 

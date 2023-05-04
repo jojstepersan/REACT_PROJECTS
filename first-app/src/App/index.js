@@ -1,17 +1,14 @@
-
 import React from 'react';
-import {AppUI} from './AppUI';
-import {ToDoProvider} from '../ToDoContext';
+import { TodoProvider } from '../TodoContext';
+import { AppUI } from './AppUI';
 
 
 function App() {
-  
   return (
-    <ToDoProvider>
-      <AppUI/>
-    </ToDoProvider>
-    )
+    <TodoProvider>
+      <AppUI />
+    </TodoProvider>
+  );
 }
 
 export default App;
-

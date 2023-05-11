@@ -11,7 +11,7 @@ import { CreateTodoButton } from '../CreateTodoButton';
 import { Modal } from '../Modal';
 import { TodoCounter } from '../TodoCounter';
 import { TodoSearch } from '../TodoSearch'
-import { ChangeAlertWithStorageListener } from '../ChangeAlert';
+import { ChangeAlert } from '../ChangeAlert';
 ;
 function App() {
   const {
@@ -47,6 +47,7 @@ function App() {
       <TodoList
         searchedTodos={searchedTodos}
         searchText={searchValue}
+        totalTodos={totalTodos}
         error={error}
         loading={loading}        
         onError = { () => <TodosError /> }
@@ -54,17 +55,7 @@ function App() {
         onEmptyTodos = { () => <EmptyTodos /> }
         onEmptySearchResults={
           (searchText) => <p>No hay resultados para {searchText}</p>
-        }
-        /*
-        render ={todo=>(
-         <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={() => completeTodo(todo.text)}
-            onDelete={() => deleteTodo(todo.text)}
-           /> 
-          )}*/
+        }       
       >
           {
           
@@ -91,7 +82,7 @@ function App() {
       <CreateTodoButton
         setOpenModal={setOpenModal}
       />
-      <ChangeAlertWithStorageListener 
+      <ChangeAlert 
         sincronize={sincronizeTodos}/>
     </React.Fragment>
   );

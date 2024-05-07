@@ -12,23 +12,30 @@ import { Modal } from '../Modal';
 import { TodoCounter } from '../TodoCounter';
 import { TodoSearch } from '../TodoSearch'
 import { ChangeAlert } from '../ChangeAlert';
-;
+
 function App() {
+  const {states, dispatch}=useTodos()
+
   const {
     error,
     loading,
-    searchedTodos,
-    completeTodo,
-    deleteTodo,
-    openModal,
-    setOpenModal,
+    searchedTodos,    
     totalTodos, 
     completedTodos,
     searchValue,
+    openModal,   
+  } = states;
+
+  const {
+    completeTodo,
+    setOpenModal,
     setSearchValue,
     addTodo,
     sincronizeTodos,
-  } = useTodos();
+    deleteTodo,
+
+  } = dispatch;
+
   return (
     <React.Fragment>
       <TodoHeader

@@ -50,20 +50,28 @@ function useTodos(props) {
     saveTodos(newTodos);
   };
   
-  return {
+  const states = {
       loading,
       error,
       totalTodos,
       completedTodos,
       searchValue,
-      setSearchValue,
       searchedTodos,
+      openModal,
+  }
+
+  const dispatch ={
+      setSearchValue,      
       addTodo,
       completeTodo,
-      deleteTodo,
-      openModal,
+      deleteTodo,      
       setOpenModal,
       sincronizeTodos,
+  }
+  
+  return {
+    states,
+    dispatch
     };
 }
 

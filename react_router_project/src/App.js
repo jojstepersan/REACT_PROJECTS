@@ -11,7 +11,7 @@ function App() {
     <HashRouter>
       <Menu/>
       <Routes>
-        <Route path='/#/' element={<HomePage/>}/>
+        <Route path='/' element={<HomePage/>}/>
         <Route path='/blog/' element={<BlogPage/>}/>
         <Route path='/profile/' element={<ProfilePage/>}/>
         <Route path='*' element={<p>not found  404</p>}/>
